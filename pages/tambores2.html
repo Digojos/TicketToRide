@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rufem os Tambores</title>
+    <style>
+        /* Estilo do tambor */
+        .drum {
+            width: 100px;
+            height: 60px;
+            background-color: brown;
+            border-radius: 50%;
+            position: relative;
+            margin: 100px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Estilo das baquetas */
+        .stick {
+            width: 8px;
+            height: 50px;
+            background-color: tan;
+            position: absolute;
+            top: -40px;
+            transform-origin: bottom;
+            animation: drumstick-move 0.2s ease infinite alternate;
+        }
+
+        /* Posicionamento das baquetas */
+        .stick.left {
+            left: 20px;
+            transform: rotate(30deg);
+        }
+        .stick.right {
+            right: 20px;
+            transform: rotate(-30deg);
+            animation-delay: 0.1s; /* Baqueta direita se move com atraso para alternar */
+        }
+
+        /* Animação das baquetas */
+        @keyframes drumstick-move {
+            0% { transform: rotate(30deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        /* Animação de vibração do tambor */
+        .drum {
+            animation: drum-vibrate 0.1s ease infinite alternate;
+        }
+
+        @keyframes drum-vibrate {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="drum">
+    <div class="stick left"></div>
+    <div class="stick right"></div>
+</div>
+<audio id="drum-audio" src="drum-sound.mp3"></audio>
+
+<!-- Botão para iniciar o som e a animação -->
+<button onclick="playDrumRoll()">Rufar os Tambores</button>
+
+<script>
+    function playDrumRoll() {
+        const drum = document.querySelector('.drum');
+        const stickLeft = document.querySelector('.stick-left');
+        const stickRight = document.querySelector('.stick-right');
+        const audio = document.getElementById('drum-audio');
+
+        // Define a duração da animação para o mesmo tempo que o áudio
+        const audioDuration = audio.duration * 1000;  // converte para ms (milissegundos)
+
+        // Adiciona a classe de animação
+        drum.classList.add('animate');
+        stickLeft.classList.add('animate');
+        stickRight.classList.add('animate');
+
+        // Reproduz o áudio
+        audio.play();
+
+        // Remove a animação após o término do áudio
+        setTimeout(() => {
+            drum.classList.remove('animate');
+            stickLeft.classList.remove('animate');
+            stickRight.classList.remove('animate');
+        }, audioDuration);
+    }
+</script>
+</body>
+</html>
