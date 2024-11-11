@@ -1,3 +1,5 @@
+import { getColorSelected, showErrorAlert, saveMove } from '../scripts/utils.js';
+
 class Neighbour {
     constructor(city, distance) {
         this.city = city;
@@ -26,13 +28,14 @@ var rail3Counter = 0;
 var rail4Counter = 0;
 var rail5Counter = 0;
 var rail6Counter = 0;
+var cities = new Set();
 
 var map = {
 };
 
 
 
-function Initialize() {
+function Initialize(cidadesPlayer) {
     rail1Counter = 0;
     rail2Counter = 0;
     rail3Counter = 0;
@@ -40,6 +43,8 @@ function Initialize() {
     rail5Counter = 0;
     rail6Counter = 0;
 
+    cities = new Set(cidadesPlayer);
+    
     map = {
         "Atlanta": new City("Atlanta"),
         "Boston": new City("Boston"),
@@ -168,7 +173,7 @@ map["Miami"].addNeighbour(map["New Orleans"],6);
 //     }
 // }
 
-var cities = new Set();
+
 
 function countPoints(city) {
     let total = 0;
@@ -190,13 +195,41 @@ function countPoints(city) {
 }
 
 
-function main() {
-    Initialize()
-    cities = new Set(getCities())
-    const firstElement = cities.values().next().value;
-    var resultado = countPoints(map[firstElement]);
+$(document).on('click', '#btClick', function() {
+    var currentPlayer = getColorSelected();
 
-    showAlert(resultado)
+    if (currentPlayer != undefined) {
+       
+        var citiesFromPlayer = getCities();
+        if (citiesFromPlayer.length <= 0) {
+            showErrorAlert("É necessário selecionar pelo menos uma cidade");
+            return;
+        }
+        var citiesFromPlayer = getCities();
+        Initialize(citiesFromPlayer);
+        var firstElement = cities.values().next().value;
+        var resultado = countPoints(map[firstElement]);
+
+        saveMove(currentPlayer?.name, rail1Counter, rail2Counter, rail3Counter, rail4Counter, rail5Counter, rail6Counter , resultado)
+
+        window.location.href = '../pages/teste.html';
+
+    }
+    
+    
+});
+
+
+function main() {
+    console.log("calculate");
+    //var teste = getColorSelected();
+
+    // Initialize()
+    // cities = new Set(getCities())
+    // const firstElement = cities.values().next().value;
+    // var resultado = countPoints(map[firstElement]);
+
+    // showAlert(resultado)
     
 }
 
@@ -252,5 +285,25 @@ function calculatePointsPerRails(size) {
         case 6:
             rail6Counter += 0.5;
             return 15;
+    }
+}
+
+function checkCheckboxes() {
+    // Get all checkboxes with name "cities"
+    const checkboxes = document.querySelectorAll('input[name="cities"]');
+    
+    // Check if at least one checkbox is checked
+    let isChecked = false;
+    checkboxes.forEach(function(checkbox) {
+        if (checkbox.checked) {
+            isChecked = true;
+        }
+    });
+
+    // Alert the result
+    if (isChecked) {
+        main()
+    } else {
+        alert('Please select at least one city.');
     }
 }

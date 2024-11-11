@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="../styles/bootstrap.min.css" rel="stylesheet">
+    <script src="../scripts/jquery-3.6.0.min.js"></script>
     <link href="../styles/main.css" rel="stylesheet">
-    <script src="main.js"></script>
+    <script src="../scripts/main.js" type="module"></script>
     <script src="../scripts/sweetalert2@11.js"></script>
 </head>
 <body>
@@ -76,7 +77,7 @@
     
                 </div>
                 <div class="col-1">
-                    <button class="btn btn-lg btn-primary" onclick="btClick()">Calcular</button>
+                    <button id="btClick" class="btn btn-lg btn-primary">Calcular</button>
                 </div>
             </div>
         </div>
@@ -93,75 +94,3 @@
 </body>
 </html>
 
-<style>
-    
-    sweet-button {
-            background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
-            color: white;  /* White text */
-            border: none;  /* No border */
-            border-radius: 50px;  /* Rounded corners */
-            padding: 15px 30px;  /* Padding inside button */
-            font-size: 18px;  /* Font size */
-            cursor: pointer;  /* Cursor to pointer on hover */
-            transition: all 0.3s ease;  /* Smooth transition on hover */
-        }
-
-        /* Hover effect */
-        .sweet-button:hover {
-            transform: scale(1.1);  /* Slightly enlarge button */
-            background: linear-gradient(135deg, #2575fc, #6a11cb); /* Reverse the gradient on hover */
-        }
-
-        /* Focus effect */
-        .sweet-button:focus {
-            outline: none;  /* Remove focus outline */
-            box-shadow: 0 0 10px rgba(37, 117, 252, 0.7);  /* Blue glow on focus */
-        }
-
-
-        .checkbox-list {
-            list-style-type: none; /* Removes default bullets */
-            padding: 0; /* Removes padding */
-        }
-
-        .checkbox-list li {
-            margin: 10px 0; /* Adds space between checkboxes */
-        }
-
-        .checkbox-list input[type="checkbox"] {
-            margin-right: 10px; /* Space between checkbox and label */
-        }
-
-       .no-line {
-        border-style: none !important;
-       }
-        
-</style>
-<script>
-
-
-function btClick() {
-
-    checkCheckboxes()
-}
-
-function checkCheckboxes() {
-            // Get all checkboxes with name "cities"
-            const checkboxes = document.querySelectorAll('input[name="cities"]');
-            
-            // Check if at least one checkbox is checked
-            let isChecked = false;
-            checkboxes.forEach(function(checkbox) {
-                if (checkbox.checked) {
-                    isChecked = true;
-                }
-            });
-
-            // Alert the result
-            if (isChecked) {
-                main()
-            } else {
-                alert('Please select at least one city.');
-            }
-        }
-</script>

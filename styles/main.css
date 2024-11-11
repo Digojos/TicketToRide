@@ -1,3 +1,44 @@
 #divBt {
     margin-top: 30px;
 }
+
+sweet-button {
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+    color: white;  /* White text */
+    border: none;  /* No border */
+    border-radius: 50px;  /* Rounded corners */
+    padding: 15px 30px;  /* Padding inside button */
+    font-size: 18px;  /* Font size */
+    cursor: pointer;  /* Cursor to pointer on hover */
+    transition: all 0.3s ease;  /* Smooth transition on hover */
+}
+
+/* Hover effect */
+.sweet-button:hover {
+    transform: scale(1.1);  /* Slightly enlarge button */
+    background: linear-gradient(135deg, #2575fc, #6a11cb); /* Reverse the gradient on hover */
+}
+
+/* Focus effect */
+.sweet-button:focus {
+    outline: none;  /* Remove focus outline */
+    box-shadow: 0 0 10px rgba(37, 117, 252, 0.7);  /* Blue glow on focus */
+}
+
+
+.checkbox-list {
+    list-style-type: none; /* Removes default bullets */
+    padding: 0; /* Removes padding */
+}
+
+.checkbox-list li {
+    margin: 10px 0; /* Adds space between checkboxes */
+}
+
+.checkbox-list input[type="checkbox"] {
+    margin-right: 10px; /* Space between checkbox and label */
+}
+
+.no-line {
+border-style: none !important;
+}

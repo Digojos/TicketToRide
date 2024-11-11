@@ -23,23 +23,16 @@ $(document).ready(function(){
 $(document).on('click', '#btNext', function() {
 
     var playerSelected = getColorSelected();
-
-    var exist = checkIfPlayerExist(playerSelected.name)
-    if (exist != null) {
-        saveMove(playerSelected.name)
+    if(playerSelected != undefined) {
+        window.location.href = '../pages/main.html';
     }
-    else
-        console.log('nao existe')
+    else {
+        showErrorAlert('Necessário selecionar uma cor, para avançar')
+    }
 });
 
 $(document).on('click', '#btResult', function() {
-    var exist = checkIfPlayerExist('playerRed')
-    if (exist != null) {
-        saveMove('playerRed')
-    }
-        
-    else
-        console.log('nao existe')
+    window.location.href = '../pages/tambores1.html';
 });
 
 

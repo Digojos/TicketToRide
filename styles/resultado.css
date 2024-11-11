@@ -1,0 +1,266 @@
+.drum {
+    width: 100px;
+    height: 50px;
+    background-color: #8B4513; /* Cor marrom do tambor */
+    border-radius: 10px;
+    position: relative;
+    margin: 100px auto; /* Centraliza o tambor */
+}
+
+/* Pedaços do tambor (superior e inferior) */
+.drum::before, .drum::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    background-color: #654321; /* Cor mais escura */
+    left: 0;
+}
+
+.drum::before {
+    top: -10px; /* Parte superior do tambor */
+}
+
+.drum::after {
+    bottom: -10px; /* Parte inferior do tambor */
+}
+
+/* Animação do tambor */
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(2deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-2deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Aplica a animação ao tambor */
+.drum {
+    animation: shake 0.1s infinite linear;
+}
+
+/* Baquetas */
+.stick {
+    width: 10px;
+    height: 80px;
+    background-color: #A0522D;
+    position: absolute;
+    top: -40px;
+    border-radius: 5px;
+    transform-origin: bottom;
+    animation: drumstick 0.1s infinite ease-in-out;
+}
+
+/* Baqueta esquerda */
+.stick-left {
+    left: 15px;
+    transform: rotate(-15deg);
+    animation-delay: 0.05s; /* Ligeiro atraso para o movimento alternado */
+}
+
+/* Baqueta direita */
+.stick-right {
+    right: 15px;
+    transform: rotate(15deg);
+}
+
+/* Animação das baquetas */
+@keyframes drumstick {
+    0%, 100% { transform: rotate(15deg); }
+    50% { transform: rotate(0deg); }
+}
+
+.podium {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 300px;
+    gap: 10px;
+}
+
+/* Pódio para o 1º lugar */
+.first {
+    width: 80px;
+    height: 120px;
+    background-color: gold;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.first::after {
+    content: "🥇";
+    font-size: 40px;
+    position: absolute;
+    top: -30px;
+}
+
+/* Pódio para o 2º lugar */
+.second {
+    width: 80px;
+    height: 110px;
+    background-color: silver;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.second::after {
+    content: "🥈";
+    font-size: 35px;
+    position: absolute;
+    top: -30px;
+}
+
+/* Pódio para o 3º lugar */
+.third {
+    width: 80px;
+    height: 100px;
+    background-color: #cd7f32;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.third::after {
+    content: "🥉";
+    font-size: 30px;
+    position: absolute;
+    top: -30px;
+}
+
+
+
+.fifth {
+    width: 80px;
+    height: 70px;
+    background-color: #cd7f32;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+   
+}
+
+.fifth::after {
+    content: "";
+    font-size: 30px;
+    position: absolute;
+    top: -30px;
+}
+.fourth {
+    width: 80px;
+    height: 70px;
+    background-color: #cd7f32;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+   
+}
+
+.fourth::after {
+    content: "";
+    font-size: 30px;
+    position: absolute;
+    top: -30px;
+}
+
+
+.pontuacao {
+    margin-top: 160px;
+    color: black;
+}
+
+#firstTotal {
+    color: black;
+    font-size: 20px;
+    position: relative;
+    top: 72px;
+    right: 9px;
+}
+
+#secondTotal {
+    color: black;
+    font-size: 20px;
+    position: relative;
+    top: 67px;
+    right: 8px;
+}
+
+#thirdTotal{
+    color: black;
+    font-size: 20px;
+    position: relative;
+    top: 62px;
+    right: 5px;
+}
+
+#fourthTotal {
+    color: black;
+    font-size: 20px;
+    position: relative;
+    top: 48px;
+    right: 8px;
+}
+
+#fifthTotal {
+    color: black;
+    font-size: 20px;
+    position: relative;
+    top: 48px;
+    right: 8px;
+}
+
+/* Popup overlay style */
+.popup {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Popup content style */
+  .popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+  }
+  
+  .close {
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
