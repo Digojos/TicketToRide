@@ -36,7 +36,24 @@
 
 /* Aplica a animação ao tambor */
 .drum {
-    animation: shake 0.1s infinite linear;
+    animation: shake 0.12s infinite linear;
+}
+
+.debug {
+    border: solid purple 1px;
+}
+
+.container {
+    position: relative;
+    height: 200px;
+    border: 1px solid #ddd;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Baquetas */
@@ -48,7 +65,7 @@
     top: -40px;
     border-radius: 5px;
     transform-origin: bottom;
-    animation: drumstick 0.1s infinite ease-in-out;
+    animation: drumstick 0.12s infinite ease-in-out;
 }
 
 /* Baqueta esquerda */
@@ -162,8 +179,11 @@
 }
 
 .fifth::after {
-    content: "";
-    font-size: 30px;
+    content: url('../images/5.png');
+    transform: scale(0.2);
+    bottom: 60px;
+    color:black;
+    font-size: 20px;
     position: absolute;
     top: -30px;
 }
@@ -183,8 +203,11 @@
 }
 
 .fourth::after {
-    content: "";
-    font-size: 30px;
+    content: url('../images/4.png');
+    transform: scale(0.2);
+    bottom: 60px;
+    color:black;
+    font-size: 20px;
     position: absolute;
     top: -30px;
 }
@@ -264,3 +287,15 @@
     top: 10px;
     right: 10px;
   }
+
+  #podiumFourthId {
+    height: 130px;
+  }
+
+  #podiumFifthId {
+    height: 130px;
+  }
+
+  .textoTeste {
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.842);
+}

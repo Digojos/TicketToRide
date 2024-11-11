@@ -1,6 +1,11 @@
 
 import { Status, Players, getAllPlayersResult  } from '../scripts/utils.js';
 
+
+// $(document).ready(function() {
+//      playDrumRoll();
+// });
+
 function playDrumRoll() {
     const drum = document.querySelector('.drum');
     const stickLeft = document.querySelector('.stick-left');
@@ -14,20 +19,26 @@ function playDrumRoll() {
     drum.classList.add('animate');
     stickLeft.classList.add('animate');
     stickRight.classList.add('animate');
-
+    
     // Reproduz o áudio
-    audio.play();
+    //audio.play();
+    console.log(audioDuration)
 
-    // Remove a animação após o término do áudio
     setTimeout(() => {
+        console.log("terminou o audio");
         drum.classList.remove('animate');
         stickLeft.classList.remove('animate');
         stickRight.classList.remove('animate');
         $('#drumsAnimation').hide();
         updatePodiumsColor()
         $('#podiumId').show()
-    }, audioDuration);
-}
+        $('#podiumFourthId').show()
+        $('#podiumFifthId').show()
+    }, 1);
+
+
+
+ }
 
 $(document).on('click', '#drumsAnimation', function() {
     playDrumRoll()

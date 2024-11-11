@@ -196,25 +196,27 @@ function countPoints(city) {
 
 
 $(document).on('click', '#btClick', function() {
-    var currentPlayer = getColorSelected();
+    
+    document.getElementById('Boston').disabled = false;
+    // var currentPlayer = getColorSelected();
 
-    if (currentPlayer != undefined) {
+    // if (currentPlayer != undefined) {
        
-        var citiesFromPlayer = getCities();
-        if (citiesFromPlayer.length <= 0) {
-            showErrorAlert("É necessário selecionar pelo menos uma cidade");
-            return;
-        }
-        var citiesFromPlayer = getCities();
-        Initialize(citiesFromPlayer);
-        var firstElement = cities.values().next().value;
-        var resultado = countPoints(map[firstElement]);
+    //     var citiesFromPlayer = getCities();
+    //     if (citiesFromPlayer.length <= 0) {
+    //         showErrorAlert("É necessário selecionar pelo menos uma cidade");
+    //         return;
+    //     }
+    //     var citiesFromPlayer = getCities();
+    //     Initialize(citiesFromPlayer);
+    //     var firstElement = cities.values().next().value;
+    //     var resultado = countPoints(map[firstElement]);
 
-        saveMove(currentPlayer?.name, rail1Counter, rail2Counter, rail3Counter, rail4Counter, rail5Counter, rail6Counter , resultado)
+    //     saveMove(currentPlayer?.name, rail1Counter, rail2Counter, rail3Counter, rail4Counter, rail5Counter, rail6Counter , resultado)
 
-        window.location.href = '../pages/teste.html';
+    //     window.location.href = '../pages/teste.html';
 
-    }
+    // }
     
     
 });
@@ -305,5 +307,89 @@ function checkCheckboxes() {
         main()
     } else {
         alert('Please select at least one city.');
+    }
+}
+
+
+
+$('input[name="cities"]').on('change', function() {
+    var elementId = $(this)[0].id;
+    clearAllCheckBoxHighlights()
+    if ($(this).is(':checked')) {
+        //Do
+        highlightNeighboursFrom(elementId)
+        teste(elementId)
+        // Additional actions when checked
+    } 
+    else {
+        //Undo
+        
+    }
+});
+
+
+function clearAllCheckBoxHighlights() {
+    var checkbox = document.getElementsByName('cities');
+
+    for(var index = 0; index < checkbox.length; index++) {
+        var currentCheckbox = checkbox[index];
+        var id = "#"
+        var idJqueryElement = id+currentCheckbox.id;
+
+        $(idJqueryElement).css({
+                    'outline': 'none',
+                    'background-color': 'transparent'
+                });
+    }
+
+}
+
+function teste(cityName) {
+    var checkbox = document.getElementsByName('cities');
+
+    for(var x = 0; x < checkbox.length; x++) {
+        var currentCheckbox = checkbox[x];
+        var id = "#"
+        var idJqueryElement = id+currentCheckbox.id;
+
+        var currentCityName = currentCheckbox.id;
+
+        var cityNameSpacesFixed = cityName.replace(/([a-z])([A-Z])/g, '$1 $2');
+        Initialize(undefined);
+        var city = map[cityNameSpacesFixed];
+        
+        document.getElementById(currentCheckbox.id).disabled = true;
+        var neighbours = city.neighbours;
+        for(var index = 0; index < neighbours.length; index++)  {
+            var neighbourCityName = city.neighbours[index].city.name;
+            var cityNameTrim = neighbourCityName.replace(/\s+/g, '')
+            var id = "#"
+            var idJqueryElement = id+cityNameTrim;
+
+            if(cityNameTrim == currentCityName)
+            {
+                document.getElementById(cityNameTrim).disabled = false;
+            }
+    
+        }
+    }
+}
+
+function highlightNeighboursFrom(cityName) {
+    var cityNameSpacesFixed = cityName.replace(/([a-z])([A-Z])/g, '$1 $2');
+    Initialize(undefined);
+    var city = map[cityNameSpacesFixed];
+
+    var neighbours = city.neighbours;
+    for(var index = 0; index < neighbours.length; index++)  {
+        var cityName = city.neighbours[index].city.name;
+        var cityNameTrim = cityName.replace(/\s+/g, '')
+        var id = "#"
+        var idJqueryElement = id+cityNameTrim;
+
+        $(idJqueryElement).css({
+            'outline': '2px solid #4CAF50',
+            'background-color': '#e0f7e0'
+        });
     }
 }
