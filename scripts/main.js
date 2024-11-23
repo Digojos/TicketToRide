@@ -195,9 +195,12 @@ function countPoints(city) {
 }
 
 
+
+
+
 $(document).on('click', '#btClick', function() {
-    
-    document.getElementById('Boston').disabled = false;
+  
+    //document.getElementById('Boston').disabled = false;
     // var currentPlayer = getColorSelected();
 
     // if (currentPlayer != undefined) {
@@ -219,6 +222,47 @@ $(document).on('click', '#btClick', function() {
     // }
     
     
+});
+
+$(document).on('click', '#adicionarBtId', function() {
+    console.log("cunho de jaca")
+    const tabela = document.getElementById("tabela").getElementsByTagName("tbody")[0];
+    const novaLinha = tabela.insertRow();
+    //Seleciona todas as cidades marcadas
+    var citiesFromPlayer = getCities();
+
+    var quantidadeCidades = citiesFromPlayer.length;
+    var primeiroIndex = 0;
+    var ultimoIndex = quantidadeCidades - 1;
+    // Cria as células e insere os valores
+    const origem = novaLinha.insertCell(0);
+    const destino = novaLinha.insertCell(1);
+    const celulaAcao = novaLinha.insertCell(2);
+    
+    origem.innerText = citiesFromPlayer[primeiroIndex];
+    destino.innerText = citiesFromPlayer[ultimoIndex];
+    
+
+    // Adiciona um botão de remover à última célula
+    const botaoRemover = document.createElement("button");
+    botaoRemover.innerText = "Remover";
+    botaoRemover.style.backgroundColor = "#ff4d4d";
+    botaoRemover.style.color = "white";
+    botaoRemover.style.border = "none";
+    botaoRemover.style.padding = "5px 10px";
+    botaoRemover.style.borderRadius = "5px";
+    botaoRemover.style.cursor = "pointer";
+
+    // Define a função para remover a linha
+    botaoRemover.onclick = function () {
+        tabela.deleteRow(novaLinha.rowIndex - 1);
+    };
+
+    celulaAcao.appendChild(botaoRemover);
+
+    //Limpa os campos de entrada
+    enableAllCities()
+    clearAllCheckBoxHighlights()
 });
 
 
@@ -344,7 +388,17 @@ function clearAllCheckBoxHighlights() {
 
 }
 
+function enableAllCities() {
+    var checkbox = document.getElementsByName('cities');
+    for(var x = 0; x < checkbox.length; x++) {
+
+        document.getElementById(checkbox[x].id).disabled = false;
+        document.getElementById(checkbox[x].id).checked = false;
+    }
+}
+
 function teste(cityName) {
+    //Só deixa as cidades vizinhas liberadas
     var checkbox = document.getElementsByName('cities');
 
     for(var x = 0; x < checkbox.length; x++) {
@@ -373,6 +427,7 @@ function teste(cityName) {
     
         }
     }
+
 }
 
 function highlightNeighboursFrom(cityName) {
